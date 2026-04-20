@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+-- local storage için mmkv kullan, zustand persist ederken her zaman mmkv kullan.
+-- styles için her zaman react-native-unistyles kullan.
+-- eğer bir iş gelirse ilk olarak skills kısmında ihtiyacın olabilecek durumları incele ve o şekilde ilerle.
+-- AGENTS.md dosyasını güncellemek gerekecektir bunun için benden onay al, değişen bir yapı olur yada kullanımı, konumu değişirse bir sistemdeki parçanın bana sor güncellemek için ve neyi güncelelyeceğinide göster ve güncelle.
+-- 
