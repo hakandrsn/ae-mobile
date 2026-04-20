@@ -1,10 +1,11 @@
+import "@/theme/unistyles";
+import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
 import { AppProviders } from "@/core/providers/app-providers";
 import { ThemeScope } from "@/core/providers/theme-scope";
 import { useSession } from "@/features/auth";
-import "@/theme/unistyles";
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -19,6 +20,9 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
+  const [fontsLoaded, fontsError] = useFonts({
+    InterVariable: require("../assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
+  });
   const {
     bootstrap,
     hasCompletedOnboarding,
@@ -31,12 +35,12 @@ function RootNavigator() {
   }, [bootstrap]);
 
   useEffect(() => {
-    if (!isLoading) {
+    if ((fontsLoaded || fontsError) && !isLoading) {
       void SplashScreen.hideAsync();
     }
-  }, [isLoading]);
+  }, [fontsError, fontsLoaded, isLoading]);
 
-  if (isLoading) {
+  if ((!fontsLoaded && !fontsError) || isLoading) {
     return null;
   }
 

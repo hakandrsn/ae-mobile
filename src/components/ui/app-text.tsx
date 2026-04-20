@@ -56,11 +56,13 @@ const styles = StyleSheet.create((theme) => ({
   },
   body: {
     color: theme.colors.text,
+    fontFamily: theme.typography.fontFamily.regular,
     fontSize: theme.typography.fontSize.md,
     lineHeight: theme.typography.lineHeight.md,
   },
   bodyMuted: {
     color: theme.colors.textMuted,
+    fontFamily: theme.typography.fontFamily.regular,
     fontSize: theme.typography.fontSize.md,
     lineHeight: theme.typography.lineHeight.md,
   },
@@ -70,6 +72,7 @@ const styles = StyleSheet.create((theme) => ({
   },
   headline: {
     color: theme.colors.text,
+    fontFamily: theme.typography.fontFamily.semibold,
     fontSize: theme.typography.fontSize.lg,
     fontWeight: "600",
     lineHeight: theme.typography.lineHeight.lg,
@@ -79,6 +82,7 @@ const styles = StyleSheet.create((theme) => ({
   },
   label: {
     color: theme.colors.primary,
+    fontFamily: theme.typography.fontFamily.semibold,
     fontSize: theme.typography.fontSize.sm,
     fontWeight: "600",
     letterSpacing: 0.4,
@@ -99,6 +103,7 @@ const styles = StyleSheet.create((theme) => ({
   },
   title: {
     color: theme.colors.text,
+    fontFamily: theme.typography.fontFamily.bold,
     fontSize: theme.typography.fontSize.xxl,
     fontWeight: "700",
     lineHeight: theme.typography.lineHeight.xxl,

@@ -54,10 +54,10 @@ export const radius = {
 
 export const typography = {
   fontFamily: {
-    regular: "System",
-    medium: "System",
-    semibold: "System",
-    bold: "System",
+    regular: "InterVariable",
+    medium: "InterVariable",
+    semibold: "InterVariable",
+    bold: "InterVariable",
   },
   fontSize: {
     xs: 12,

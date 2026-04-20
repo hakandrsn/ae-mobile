@@ -56,6 +56,7 @@ const styles = StyleSheet.create((theme) => ({
     backgroundColor: theme.colors.text,
   },
   label: {
+    fontFamily: theme.typography.fontFamily.semibold,
     fontWeight: "600",
   },
   pressed: {
