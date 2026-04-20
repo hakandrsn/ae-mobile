@@ -30,8 +30,8 @@ export function OnboardingWelcomeScreen() {
           />
           <AppButton
             label="Cikisa Don"
-            onPress={() => {
-              signOut();
+            onPress={async () => {
+              await signOut();
               router.replace(paths.publicHome);
             }}
             style={styles.fullWidth}

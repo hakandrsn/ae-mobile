@@ -1,6 +1,11 @@
 import { createStore, useStore } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import {
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from "@/services/storage/secure-storage";
 import { mmkvStateStorage } from "@/store/storage";
 
 type SessionStatus = "checking" | "authenticated" | "guest";
@@ -12,11 +17,11 @@ type SessionState = {
 };
 
 type SessionActions = {
-  bootstrap: () => void;
+  bootstrap: () => Promise<void>;
   completeOnboarding: () => void;
-  register: () => void;
-  signIn: () => void;
-  signOut: () => void;
+  register: () => Promise<void>;
+  signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 type SessionStore = SessionState & SessionActions;
@@ -27,38 +32,52 @@ export const sessionStore = createStore<SessionStore>()(
       hasCompletedOnboarding: false,
       status: "checking",
       sessionToken: null,
-      bootstrap: () =>
+      bootstrap: async () => {
+        const token = await getAccessToken();
+
         set({
-          status: get().sessionToken ? "authenticated" : "guest",
-        }),
+          sessionToken: token,
+          status: token ? "authenticated" : "guest",
+        });
+      },
       completeOnboarding: () =>
         set({
           hasCompletedOnboarding: true,
         }),
-      register: () =>
+      register: async () => {
+        const sessionToken = "demo-session-new-user";
+        await setAccessToken(sessionToken);
+
         set({
           hasCompletedOnboarding: false,
           status: "authenticated",
-          sessionToken: "demo-session-new-user",
-        }),
-      signIn: () =>
+          sessionToken,
+        });
+      },
+      signIn: async () => {
+        const sessionToken = "demo-session-existing-user";
+        await setAccessToken(sessionToken);
+
         set({
           hasCompletedOnboarding: true,
           status: "authenticated",
-          sessionToken: "demo-session-existing-user",
-        }),
-      signOut: () =>
+          sessionToken,
+        });
+      },
+      signOut: async () => {
+        await removeAccessToken();
+
         set({
           hasCompletedOnboarding: false,
           status: "guest",
           sessionToken: null,
-        }),
+        });
+      },
     }),
     {
       name: "session-store",
       partialize: (state) => ({
         hasCompletedOnboarding: state.hasCompletedOnboarding,
-        sessionToken: state.sessionToken,
       }),
       storage: createJSONStorage(() => mmkvStateStorage),
     },

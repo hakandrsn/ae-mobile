@@ -56,14 +56,16 @@
           }
         }
       ],
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": true
+        }
+      ],
       "expo-font",
       "expo-image",
       "expo-web-browser"
     ],
-    "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
-    },
     "ios": {
       "infoPlist": {
         "ExpoLocalization_supportsRTL": true,
@@ -75,5 +77,20 @@
       },
       "bundleIdentifier": "com.anonymous.aemobil"
     }
+  },
+  "experiments": {
+    "typedRoutes": true,
+    "reactCompiler": true
+  },
+  "ios": {
+    "infoPlist": {
+      "ExpoLocalization_supportsRTL": true,
+      "CFBundleLocalizations": [
+        "en",
+        "tr",
+        "ar"
+      ]
+    },
+    "bundleIdentifier": "com.anonymous.aemobil"
   }
 }

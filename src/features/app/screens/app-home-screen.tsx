@@ -106,8 +106,8 @@ export function AppHomeScreen() {
           />
           <AppButton
             label="Sign Out"
-            onPress={() => {
-              signOut();
+            onPress={async () => {
+              await signOut();
               router.replace(paths.publicHome);
             }}
             style={styles.fullWidth}

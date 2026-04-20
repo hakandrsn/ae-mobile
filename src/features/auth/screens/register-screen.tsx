@@ -22,8 +22,8 @@ export function RegisterScreen() {
         <View style={styles.actions}>
           <AppButton
             label="Demo Register"
-            onPress={() => {
-              register();
+            onPress={async () => {
+              await register();
               router.replace(paths.onboardingWelcome);
             }}
             style={styles.fullWidth}

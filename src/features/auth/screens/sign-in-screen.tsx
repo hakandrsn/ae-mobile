@@ -23,8 +23,8 @@ export function SignInScreen() {
         <View style={styles.actions}>
           <AppButton
             label="Mevcut Kullanici Sign In"
-            onPress={() => {
-              signIn();
+            onPress={async () => {
+              await signIn();
               router.replace(paths.appHome);
             }}
             style={styles.fullWidth}
