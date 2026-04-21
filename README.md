@@ -66,5 +66,30 @@ npm run start
 npm run ios
 npm run android
 npm run web
+npm run icons:generate
 ```
+
+## Ikon Sistemi
+
+Proje custom ikonlari `SVGR + react-native-svg` ile `assets/icons/svg` klasorundaki SVG dosyalarindan component olarak kullanir.
+
+- Kaynak SVG klasoru: `assets/icons/svg`
+- Uretilen registry: `src/components/ui/app-icon.registry.ts`
+- Uygulama ici kullanim: `AppIcon`
+- Tek renkli ikon standardi: `fill="currentColor"` veya `stroke="currentColor"`
+
+Yeni ikon ekleme akisi:
+
+```bash
+npm run icons:generate
+```
+
+Kullanim ornegi:
+
+```tsx
+<AppIcon name="bell-plus" size={24} color="#111827" />
+```
+
+`color` override yalnizca `currentColor` kullanan tek renkli SVG'lerde garantilidir. Cok renkli SVG'ler kendi renklerini korur.
+
 # expo-template

@@ -3,11 +3,11 @@ import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 import { AppButton, AppScreen, AppText, SurfaceCard } from "@/components/ui";
+import { AppIcon } from "@/components/ui/app-icon";
 import { paths } from "@/core/navigation/paths";
+import { useSession } from "@/features/auth";
 import { useAppTranslation, useLocaleSettings } from "@/i18n";
 import { useAppStore } from "@/store";
-
-import { useSession } from "@/features/auth";
 
 export function AppHomeScreen() {
   const { t } = useAppTranslation();
@@ -30,7 +30,7 @@ export function AppHomeScreen() {
           ayni stack icinde sibling route olarak tanimlanir.
         </AppText>
       </SurfaceCard>
-
+      <AppIcon name="add-1" size={48} color="blue" />
       <SurfaceCard>
         <AppText variant="headline">{t("settings.languageSectionTitle")}</AppText>
         <View

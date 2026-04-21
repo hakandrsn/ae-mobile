@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
+import { appFonts } from "@/core/fonts/app-fonts";
 import { AppProviders } from "@/core/providers/app-providers";
 import { ThemeScope } from "@/core/providers/theme-scope";
 import { useSession } from "@/features/auth";
@@ -20,15 +21,9 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
-  const [fontsLoaded, fontsError] = useFonts({
-    InterVariable: require("../assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
-  });
-  const {
-    bootstrap,
-    hasCompletedOnboarding,
-    isAuthenticated,
-    isLoading,
-  } = useSession();
+  const [fontsLoaded, fontsError] = useFonts(appFonts);
+  const { bootstrap, hasCompletedOnboarding, isAuthenticated, isLoading } =
+    useSession();
 
   useEffect(() => {
     bootstrap();

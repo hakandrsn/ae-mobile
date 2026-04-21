@@ -1,0 +1,7 @@
+{
+  "native": true,
+  "typescript": true,
+  "memo": true,
+  "dimensions": false,
+  "expandProps": "end"
+}
