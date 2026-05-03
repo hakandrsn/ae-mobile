@@ -7,6 +7,18 @@
     "icon": "./assets/images/icon.png",
     "scheme": "aemobil",
     "userInterfaceStyle": "automatic",
+    "ios": {
+      "infoPlist": {
+        "ExpoLocalization_supportsRTL": true,
+        "CFBundleLocalizations": ["en", "tr", "ar"],
+        "NSLocationWhenInUseUsageDescription": "Konumunuz haritada gösterilir ve size yakın ilanlar sunulur.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Konumunuz haritada gösterilir ve size yakın ilanlar sunulur."
+      },
+      "bundleIdentifier": "com.eoist.ae",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -15,7 +27,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.aemobil"
+      "package": "com.eoist.ae"
     },
     "web": {
       "bundler": "metro",
@@ -25,22 +37,19 @@
     "extra": {
       "supportsRTL": true
     },
+    "locales": {
+      "en": "./locales/native/en.json",
+      "tr": "./locales/native/tr.json",
+      "ar": "./locales/native/ar.json"
+    },
     "plugins": [
       "expo-router",
       [
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": [
-              "en",
-              "tr",
-              "ar"
-            ],
-            "android": [
-              "en",
-              "tr",
-              "ar"
-            ]
+            "ios": ["en", "tr", "ar"],
+            "android": ["en", "tr", "ar"]
           }
         }
       ],
@@ -62,35 +71,25 @@
           "configureAndroidBackup": true
         }
       ],
-      "expo-font",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Figtree-VariableFont_wght.ttf"]
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Konumunuz haritada gösterilir ve size yakın ilanlar sunulur.",
+          "locationAlwaysAndWhenInUsePermission": "Konumunuz haritada gösterilir ve size yakın ilanlar sunulur."
+        }
+      ],
       "expo-image",
       "expo-web-browser"
-    ],
-    "ios": {
-      "infoPlist": {
-        "ExpoLocalization_supportsRTL": true,
-        "CFBundleLocalizations": [
-          "en",
-          "tr",
-          "ar"
-        ]
-      },
-      "bundleIdentifier": "com.anonymous.aemobil"
-    }
+    ]
   },
   "experiments": {
     "typedRoutes": true,
     "reactCompiler": true
-  },
-  "ios": {
-    "infoPlist": {
-      "ExpoLocalization_supportsRTL": true,
-      "CFBundleLocalizations": [
-        "en",
-        "tr",
-        "ar"
-      ]
-    },
-    "bundleIdentifier": "com.anonymous.aemobil"
   }
 }

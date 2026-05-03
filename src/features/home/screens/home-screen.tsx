@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
-import { AppButton, AppScreen, AppText, SurfaceCard } from "@/components/ui";
+import { AppScreen, Button, Surface, Typography } from '@/components/ui';
 import { useAppTranslation } from "@/i18n";
 import { useAppStore } from "@/store/app-store";
 
@@ -17,30 +17,28 @@ export function HomeScreen() {
   return (
     <AppScreen>
       <View style={styles.heroSection}>
-        <AppText variant="label">{t("home.badge")}</AppText>
-        <AppText variant="title">{t("home.title")}</AppText>
-        <AppText variant="bodyMuted">{t("home.description")}</AppText>
-        <AppButton
-          label={`${t("common.continue")} (${localeOverride ?? "system"})`}
-          onPress={() =>
-            setLocaleOverride(localeOverride === "tr" ? "en" : "tr")
-          }
+        <Typography variant="label">{t('home.badge')}</Typography>
+        <Typography variant="title">{t('home.title')}</Typography>
+        <Typography variant="bodyMuted">{t('home.description')}</Typography>
+        <Button
+          label={`${t('common.continue')} (${localeOverride ?? 'system'})`}
+          onPress={() => setLocaleOverride(localeOverride === 'tr' ? 'en' : 'tr')}
         />
       </View>
 
-      <SurfaceCard>
-        <AppText variant="headline">{t("home.architectureTitle")}</AppText>
+      <Surface>
+        <Typography variant="headline">{t('home.architectureTitle')}</Typography>
         {architectureItems.map((item) => (
-          <AppText key={item} variant="bodyMuted">
+          <Typography key={item} variant="bodyMuted">
             • {item}
-          </AppText>
+          </Typography>
         ))}
-      </SurfaceCard>
+      </Surface>
 
-      <SurfaceCard>
-        <AppText variant="headline">{t("home.nextTitle")}</AppText>
-        <AppText variant="bodyMuted">{t("home.nextDescription")}</AppText>
-      </SurfaceCard>
+      <Surface>
+        <Typography variant="headline">{t('home.nextTitle')}</Typography>
+        <Typography variant="bodyMuted">{t('home.nextDescription')}</Typography>
+      </Surface>
     </AppScreen>
   );
 }

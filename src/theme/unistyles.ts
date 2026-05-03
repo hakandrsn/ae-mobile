@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet } from 'react-native-unistyles';
 
-import { darkTheme, lightTheme } from "./tokens";
+import { darkTheme, lightTheme } from './tokens';
 
 export const appThemes = {
   light: lightTheme,
@@ -9,7 +9,7 @@ export const appThemes = {
 
 StyleSheet.configure({
   settings: {
-    initialTheme: "light",
+    initialTheme: 'light',
   },
   themes: appThemes,
 });

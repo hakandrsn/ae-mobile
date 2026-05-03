@@ -10,7 +10,8 @@ Amaç:
 
 ## 1. Genel Mimari
 
-Bu proje Expo + Expo Router + NativeWind + Zustand + React Query + Axios + i18next tabanli bir mobil app foundation'idir.
+Bu proje Expo + Expo Router + **react-native-unistyles 3.x** + Zustand + React Query + Axios + i18next tabanli bir mobil
+app foundation'idir.
 
 Ana klasor mantigi:
 
@@ -21,7 +22,7 @@ Ana klasor mantigi:
 - `src/i18n/`: locale, translation, direction kurallari
 - `src/services/`: API client, query client, remote data yardimcilari
 - `src/store/`: global app store
-- `src/theme/`: token, theme, css variable uretimi
+- `src/theme/`: token'lar ve Unistyles yapilandirmasi
 - `docs/`: insana donuk mimari notlari
 
 Kritik ilke:
@@ -30,55 +31,51 @@ Kritik ilke:
 - Asil ekran/component implementasyonu `src/features/` ve `src/components/` altinda
 - `app/` dosyalari ince route adapter olarak kalmali
 
-## 2. Theme Sistemi
+## 2. Theme Sistemi (Unistyles)
 
 Theme altyapisi:
 
-- `src/theme/tokens.ts`
-- `src/theme/variables.ts`
-- `src/core/providers/theme-provider.tsx`
-- `src/core/providers/theme-scope.tsx`
-- `tailwind.config.js`
+- `src/theme/tokens.ts` — `lightTheme` / `darkTheme`, `spacing`, `radius`, semantic renk contract
+- `src/theme/unistyles.ts` — `StyleSheet.configure({ themes, settings })`; **uygulama girisinde** `@/theme/unistyles`
+  import edilir (`app/_layout.tsx`)
+- `babel.config.js` — `react-native-unistyles/plugin` (`root: "src"`)
+- `src/core/providers/theme-provider.tsx` — React context ile `AppTheme` (tokens); tercih / mantik icin
+- `src/core/providers/theme-scope.tsx` — `UnistylesRuntime.setTheme(theme.id)` + root arka plan
 
 Calisma mantigi:
 
-1. Theme contract `lightTheme` ve `darkTheme` olarak `tokens.ts` icinde tanimlidir.
-2. `createThemeVariables()` semantic renkleri CSS variable'a cevirir.
-3. `ThemeScope` root seviyede bu variable'lari uygular.
-4. NativeWind semantic renkleri `tailwind.config.js` icinde `var(--color-...)` uzerinden tuketir.
+1. Design token'lar ve semantic tema `tokens.ts` icindedir.
+2. Unistyles temalari `unistyles.ts` ile `light` / `dark` olarak kayitlidir.
+3. `ThemeScope`, Zustand'daki tema tercihine gore runtime tema degistirir (`theme.id` = `"light"` | `"dark"`).
 
 Kurallar:
 
-- Theme renklerini component icinde `style={{ color: ... }}` ile enjekte etme.
-- Ilk tercih her zaman semantic `className` kullanmak.
-- Yeni semantic renk eklenirse:
-  - `src/theme/tokens.ts`
-  - `src/theme/variables.ts`
-  - `tailwind.config.js`
-  bu uc yerde birlikte guncellenmeli.
+- Renk/spacing icin **birebir hex hard-code** etmek yerine `StyleSheet.create((theme) => (...))` icinde
+  `theme.colors.*`, `theme.spacing.*`, `theme.radius.*` kullan.
+- **NativeWind, `className`, `tailwind.config.js` kullanma** — bu proje Unistyles 3 ile kurgulanmistir.
+- Yeni semantic renk veya token eklenirse once `tokens.ts` (ve bagimli tema tipleri) guncellenmeli, sonra ilgili
+  component stilleri.
 
-## 3. Styling ve NativeWind
+## 3. Styling (react-native-unistyles)
 
 Styling altyapisi:
 
-- `nativewind`
-- `tailwind.config.js`
-- `global.css`
-- `babel.config.js`
-- `metro.config.js`
+- `react-native-unistyles`
+- `StyleSheet` importu: `import { StyleSheet } from "react-native-unistyles"`
+- `babel.config.js` icindeki Unistyles plugin
 
 Shared component styling mantigi:
 
-- Varsayilan stil `className` ile verilir.
-- Shared component icinde semantic variant/tone API olabilir.
-- `style` sadece zorunlu native edge-case durumlarinda kullanilmali.
+- Varsayilan stil `StyleSheet.create((theme) => ({ ... }))` ile theme bagimli objelerdir.
+- Shared component'lerde `variant`, `tone`, `color` gibi **semantic prop** API'leri tercih edilir.
+- `style` prop'u yalnizca disaridan override veya edge-case icin kullanilir; ana gorunum yine `styles.*` uzerinden
+  gelir.
 
 Kurallar:
 
-- Yeni UI component yazarken ilk tercih `className`.
-- Ortak component'lerde `variant`, `tone`, `color` gibi semantic prop'lar tercih edilir.
-- Inline style kullanimi minimumda tutulur.
-- Root theme semantic class'lar uzerinden akar.
+- Yeni UI component yazarken ilk tercih **Unistyles `StyleSheet.create`**.
+- `theme` disinda kalan tek seferlik degerler icin bile mumkunse token'lara yakin tut (constants veya theme extension).
+- RTL ve layout icin `AppText` ve mevcut primitive'lerdeki ornekleri takip et.
 
 Ornekler:
 
@@ -86,6 +83,8 @@ Ornekler:
 - `src/components/ui/app-button.tsx`
 - `src/components/ui/surface-card.tsx`
 - `src/components/ui/app-screen.tsx`
+
+Insan dokumanı: `docs/unistyles.md`
 
 ## 4. Shared Component Sistemi
 
@@ -111,7 +110,7 @@ RTL notu:
 
 - `AppText` locale direction farkindaligina sahiptir.
 - Yeni shared component yazarken RTL dusunulmeli.
-- `start/end`, `text-left/text-right`, `flex-row` gibi kararlar locale yonu ile uyumlu tasarlanmalı.
+- `start/end`, metin hizasi, `flex-row` gibi kararlar locale yonu ile uyumlu tasarlanmalı.
 
 ## 5. i18n ve Dil Sistemi
 
@@ -156,32 +155,33 @@ RTL notu:
 Ana dosyalar:
 
 - `app/_layout.tsx`
-- `app/(public)/...`
-- `app/(auth)/...`
+- `app/(onboarding)/...`
 - `app/(app)/...`
+- `app/(auth)/...`
 - `app/(app)/(tabs)/_layout.tsx`
 - `src/core/navigation/paths.ts`
 - `docs/expo-router.md`
 
-Route group mantigi:
+Route group mantigi (guncel kok stack):
 
-- `(public)`: login gerektirmeyen ekranlar
-- `(auth)`: auth flow ekranlari
-- `(app)`: authenticated alan
+- `(onboarding)`: onboarding tamamlanincaya kadar (`!hasCompletedOnboarding`)
+- `(app)` ve `(auth)`: onboarding tamamlandiktan sonra (`hasCompletedOnboarding`); ana uygulama sekmeleri + ayri auth
+  flow ekranlari (auth, app ile **ayni kok korumasi altinda kardes** grup — auth ekranlari `(app)/_layout` stack'ine
+  gomulmez)
 - `(app)/(tabs)`: ana tab navigator
 - `app/modal.tsx`: global modal route
 
 Auth korumasi:
 
-- Root `Stack.Protected` kullanilir
-- Guest icin public/auth
-- Authenticated user icin app grubu
+- Kok `Stack.Protected` onboarding ve post-onboarding gruplarini ayirir.
+- Oturum / tab bazli kisitlar icin ayrica `Tabs.Protected`, layout guard'lari veya login sheet gibi pattern'ler
+  kullanilabilir.
 
 Tab bar kurallari:
 
 - Kalici sekmeler `(tabs)` altindadir
 - Route var ama sekme butonu gosterilmeyecekse `href: null`
-- Tab bar gizlenecek tam ekran akislari tabs grubunun disinda, ayni stack altinda sibling route olarak acilir
+- Tab bar gizlenecek tam ekran akislari tabs grubunun disinda, ayni `(app)` stack altinda sibling route olarak acilir
 
 Ornek:
 
@@ -259,11 +259,15 @@ Kurallar:
 - API cagrilari service/query katmanindan gecmeli
 - Query key'ler merkezi tanimlanmali
 - Axios error'lari normalize edilerek handle edilmeli
+- **Kimlik dogrulama:** `api-client` istek interceptor'inda `expo-secure-store` uzerinden okunan access token varsa
+  `Authorization: Bearer <token>` eklenir (`src/services/storage/secure-storage.ts`). Token yoksa baslik eklenmez (
+  public endpoint'ler).
 
 Gelecek pattern:
 
 - Feature bazli query hook'lari `src/features/<feature>/api` ya da `hooks` altinda tutulabilir
 - Ortak axios instance kullanilmali
+- Ileride refresh token / 401 retry icin response interceptor genisletilebilir
 
 ## 10. Auth ve Session
 
@@ -272,17 +276,17 @@ Ana dosyalar:
 - `src/features/auth/hooks/use-session.ts`
 - `src/features/auth/store/session-store.ts`
 - `src/features/auth/screens/sign-in-screen.tsx`
+- `src/services/storage/secure-storage.ts`
 
 Su anki durum:
 
-- Session mock/in-memory
-- `bootstrap()` ilk durum kontrolu icin var
+- Session token `SecureStore`'da; `session-store` bootstrap ile senkronize eder
+- `bootstrap()` ilk acilista token okur
 
 Gelecek plan:
 
-- Gercek persistence icin `expo-secure-store`
 - Token refresh / session restore
-- Gerekirse role bazli nested protected routes
+- Role bazli nested protected routes (gerekiyorsa)
 
 ## 11. Route Helper Kullanimi
 
@@ -305,7 +309,7 @@ Bu projede yeni agent'lar sunlari korumali:
 - `app/` altinda logic buyutme, logic'i `src/` altinda tut
 - Yeni sayfa = route adapter + feature screen ayrimi
 - Shared component varsa onu genislet, benzer component'i kopyalama
-- Theme ve color kullanimi semantic olmali
+- **Stil: Unistyles + theme token'lari** — className / Tailwind yok
 - Hard-coded text yazma, i18n kullan
 - Zustand selector'da object return etme
 - Tabs icinde full-screen secondary page gerekiyorsa tabs disi sibling stack kullan
@@ -316,10 +320,12 @@ Bu projede yeni agent'lar sunlari korumali:
 Proje ici:
 
 - `docs/expo-router.md`
-- `docs/native-wind.md`
+- `docs/unistyles.md`
+- `.agents/rules/rule.mdc`
 
 Harici resmi referanslar:
 
+- React Native Unistyles 3
 - Expo Router Authentication
 - Expo Router Protected Routes
 - Expo Router Tabs
@@ -335,9 +341,10 @@ Bu repo'da degisiklik yapmadan once:
 2. Mevcut pattern var mi?
    - varsa onu genislet
 3. Text i18n'e girmeli mi?
-4. Renk semantic theme class olarak tanimlanmali mi?
+4. Renk ve spacing `tokens.ts` + Unistyles `theme` uzerinden mi tanimlanmali?
 5. Zustand selector primitive mi?
 6. Route degisikligi `paths.ts` ile uyumlu mu?
 7. RTL etkisi var mi?
+8. API cagrisi `api-client` ile mi (token interceptor davranisini bozmadan)?
 
 Bu checklist yeni agent'in mevcut foundation'i bozmadan ilerlemesini saglar.

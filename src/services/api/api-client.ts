@@ -1,13 +1,25 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { normalizeApiError } from "./normalize-api-error";
+import { getAccessToken } from '@/services/storage/secure-storage';
+
+import { normalizeApiError } from './normalize-api-error';
 
 export const apiClient = axios.create({
   baseURL: process.env.EXPO_PUBLIC_BASE_URL,
   timeout: 10000,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
+});
+
+apiClient.interceptors.request.use(async (config) => {
+  const token = await getAccessToken();
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
 });
 
 apiClient.interceptors.response.use(

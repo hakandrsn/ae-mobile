@@ -1,7 +1,7 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  initialRouteName: '(tabs)',
 };
 
 export default function AppLayout() {
@@ -12,14 +12,14 @@ export default function AppLayout() {
         name="details/[id]"
         options={{
           headerShown: true,
-          title: "Details",
+          title: 'Details',
         }}
       />
       <Stack.Screen
         name="settings"
         options={{
           headerShown: true,
-          title: "Settings",
+          title: 'Settings',
         }}
       />
     </Stack>

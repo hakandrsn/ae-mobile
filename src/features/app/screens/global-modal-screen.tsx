@@ -1,26 +1,25 @@
 import { router } from "expo-router";
 import { StyleSheet } from "react-native-unistyles";
 
-import { AppButton, AppScreen, AppText, SurfaceCard } from "@/components/ui";
+import { AppScreen, Button, Surface, Typography } from '@/components/ui';
 
 export function GlobalModalScreen() {
   return (
     <AppScreen contentStyle={styles.centeredContent}>
-      <SurfaceCard style={styles.card}>
-        <AppText variant="label">Modal Route</AppText>
-        <AppText variant="title">Global Modal</AppText>
-        <AppText color="muted">
-          Kisa ama navigation historynin parcasi olmasi gereken akislarda Expo
-          Router modal routeu kullanilir. Basit confirm/popup senaryolari icin
-          ise React Native `Modal` daha dogrudur.
-        </AppText>
-        <AppButton
+      <Surface style={styles.card}>
+        <Typography variant="label">Modal Route</Typography>
+        <Typography variant="title">Global Modal</Typography>
+        <Typography color="muted">
+          Kisa ama navigation historynin parcasi olmasi gereken akislarda Expo Router modal routeu
+          kullanilir. Basit confirm/popup senaryolari icin ise React Native `Modal` daha dogrudur.
+        </Typography>
+        <Button
           label="Modal Kapat"
           onPress={() => router.back()}
           style={styles.fullWidth}
-          tone="primary"
+          variant="primary"
         />
-      </SurfaceCard>
+      </Surface>
     </AppScreen>
   );
 }

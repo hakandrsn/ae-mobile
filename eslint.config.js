@@ -7,7 +7,7 @@ module.exports = defineConfig([
   eslintPluginPrettierRecommended,
   expoConfig,
   {
-    ignores: ["dist/*","app-example/**"],
-    files: ['babel.config.js']
+    ignores: ['dist/*', 'app-example/**'],
+    files: ['babel.config.js'],
   },
 ]);

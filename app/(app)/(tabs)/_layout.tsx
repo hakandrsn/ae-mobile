@@ -1,8 +1,8 @@
-import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Ionicons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
 
-import { AnimatedTabBar } from "@/core/navigation/animated-tab-bar";
-import { TabBarVisibilityProvider } from "@/core/navigation/tab-bar-visibility-context";
+import { AnimatedTabBar } from '@/core/navigation/animated-tab-bar';
+import { TabBarVisibilityProvider } from '@/core/navigation/tab-bar-visibility-context';
 
 export default function AppTabsLayout() {
   return (
@@ -16,15 +16,14 @@ export default function AppTabsLayout() {
             height: 72,
             paddingBottom: 10,
             paddingTop: 8,
-            position: "absolute",
+            position: 'absolute',
           },
         }}
-        tabBar={(props) => <AnimatedTabBar {...props} />}
-      >
+        tabBar={(props) => <AnimatedTabBar {...props} />}>
         <Tabs.Screen
           name="home"
           options={{
-            title: "Home",
+            title: 'Home',
             tabBarIcon: ({ color, size }) => (
               <Ionicons color={color} name="home-outline" size={size} />
             ),
@@ -33,7 +32,7 @@ export default function AppTabsLayout() {
         <Tabs.Screen
           name="search"
           options={{
-            title: "Search",
+            title: 'Search',
             tabBarIcon: ({ color, size }) => (
               <Ionicons color={color} name="search-outline" size={size} />
             ),
@@ -42,7 +41,7 @@ export default function AppTabsLayout() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profile",
+            title: 'Profile',
             tabBarIcon: ({ color, size }) => (
               <Ionicons color={color} name="person-outline" size={size} />
             ),

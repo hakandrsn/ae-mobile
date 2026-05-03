@@ -6,10 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const iconsDir = path.join(projectRoot, "assets/icons/svg");
-const outputFile = path.join(
-  projectRoot,
-  "src/components/ui/app-icon.registry.ts",
-);
+const outputFile = path.join(projectRoot, 'src/components/ui/icon/app-icon.registry.ts');
 
 const IMPORT_PREFIX = "Icon";
 

@@ -1,8 +1,8 @@
-import { createInstance } from "i18next";
-import { initReactI18next, useTranslation } from "react-i18next";
+import { createInstance } from 'i18next';
+import { initReactI18next, useTranslation } from 'react-i18next';
 
-import { appI18nStore } from "@/store/app-store";
-import { useAppStore } from "@/store";
+import { appI18nStore } from '@/store/app-store';
+import { useAppStore } from '@/store';
 
 import {
   detectDeviceLocale,
@@ -10,8 +10,8 @@ import {
   isRTLLocale,
   isSupportedLocale,
   type Locale,
-} from "./locale";
-import { ar, en, tr } from "./translations";
+} from './locale';
+import { ar, en, tr } from './translations';
 
 const resources = {
   ar: {
@@ -38,10 +38,10 @@ function resolveInitialLocale(): Locale {
 }
 
 void i18n.use(initReactI18next).init({
-  compatibilityJSON: "v4",
+  compatibilityJSON: 'v4',
   resources,
   lng: resolveInitialLocale(),
-  fallbackLng: "en",
+  fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
   },
@@ -55,13 +55,8 @@ appI18nStore.subscribe((state, previousState) => {
 });
 
 export { i18n };
-export type { Locale } from "./locale";
-export {
-  detectDeviceLocale,
-  getLocaleDirection,
-  isRTLLocale,
-  isSupportedLocale,
-} from "./locale";
+export type { Locale } from './locale';
+export { detectDeviceLocale, getLocaleDirection, isRTLLocale, isSupportedLocale } from './locale';
 export function useAppTranslation() {
   return useTranslation();
 }

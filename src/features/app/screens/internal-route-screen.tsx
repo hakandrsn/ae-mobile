@@ -1,17 +1,17 @@
-import { AppScreen, AppText, SurfaceCard } from "@/components/ui";
+import { AppScreen, Surface, Typography } from '@/components/ui';
 import { StyleSheet } from "react-native-unistyles";
 
 export function InternalRouteScreen() {
   return (
     <AppScreen>
-      <SurfaceCard style={styles.card}>
-        <AppText variant="label">Hidden Tab</AppText>
-        <AppText variant="title">Internal Route</AppText>
-        <AppText color="muted">
-          Bu route tabs icinde yasiyor ama tab barda gorunmuyor. Expo docstaki
-          `href: null` paterni bunun icin en temiz yontem.
-        </AppText>
-      </SurfaceCard>
+      <Surface style={styles.card}>
+        <Typography variant="label">Hidden Tab</Typography>
+        <Typography variant="title">Internal Route</Typography>
+        <Typography color="muted">
+          Bu route tabs icinde yasiyor ama tab barda gorunmuyor. Expo docstaki `href: null` paterni
+          bunun icin en temiz yontem.
+        </Typography>
+      </Surface>
     </AppScreen>
   );
 }

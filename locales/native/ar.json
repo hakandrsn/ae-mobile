@@ -1,0 +1,7 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "يسمح لـ ae-mobil باستخدام موقعك للمحتوى القريب وميزات الخريطة.",
+    "NSLocationAlwaysAndWhenInUseUsageDescription": "يسمح لـ ae-mobil باستخدام موقعك للمحتوى القريب وميزات الخريطة.",
+    "NSLocationAlwaysUsageDescription": "يسمح لـ ae-mobil باستخدام موقعك للمحتوى القريب وميزات الخريطة."
+  }
+}

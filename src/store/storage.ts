@@ -2,7 +2,7 @@ import { createMMKV } from "react-native-mmkv";
 import type { StateStorage } from "zustand/middleware";
 
 const storage = createMMKV({
-  id: "expo-template-storage",
+  id: 'ae-mobil-storage',
 });
 
 export const mmkvStateStorage: StateStorage = {

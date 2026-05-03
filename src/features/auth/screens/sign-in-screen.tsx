@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
-import { AppButton, AppScreen, AppText, SurfaceCard } from "@/components/ui";
+import { AppScreen, Button, Surface, Typography } from '@/components/ui';
 import { paths } from "@/core/navigation/paths";
 
 import { useSession } from "../hooks/use-session";
@@ -12,38 +12,38 @@ export function SignInScreen() {
 
   return (
     <AppScreen contentStyle={styles.centeredContent}>
-      <SurfaceCard style={styles.heroCard}>
-        <AppText variant="label">Auth</AppText>
-        <AppText variant="title">Sign In</AppText>
-        <AppText color="muted">
-          Auth ekranlari ayri route group altinda tutulur. Kullanici giris
-          yaptiginda route guard onu dogru yere yonlendirir. Mevcut user ise ana
-          uygulamaya, onboarding eksikse onboarding akisina gider.
-        </AppText>
+      <Surface style={styles.heroCard}>
+        <Typography variant="label">Auth</Typography>
+        <Typography variant="title">Sign In</Typography>
+        <Typography color="muted">
+          Auth ekranlari ayri route group altinda tutulur. Kullanici giris yaptiginda route guard
+          onu dogru yere yonlendirir. Mevcut user ise ana uygulamaya, onboarding eksikse onboarding
+          akisina gider.
+        </Typography>
         <View style={styles.actions}>
-          <AppButton
+          <Button
             label="Mevcut Kullanici Sign In"
             onPress={async () => {
               await signIn();
               router.replace(paths.appHome);
             }}
             style={styles.fullWidth}
-            tone="primary"
+            variant="primary"
           />
-          <AppButton
+          <Button
             label="Register'a Git"
             onPress={() => router.push(paths.register)}
             style={styles.fullWidth}
-            tone="surface"
+            variant="surface"
           />
-          <AppButton
-            label="Public Home"
-            onPress={() => router.replace(paths.publicHome)}
+          <Button
+            label="Ana Sayfaya Git"
+            onPress={() => router.replace(paths.appHome)}
             style={styles.fullWidth}
-            tone="surface"
+            variant="surface"
           />
         </View>
-      </SurfaceCard>
+      </Surface>
     </AppScreen>
   );
 }

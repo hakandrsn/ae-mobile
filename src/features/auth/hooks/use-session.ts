@@ -1,10 +1,8 @@
-import { useSessionStore } from "../store/session-store";
+import { useSessionStore } from '@/features/auth/store/session-store';
 
 export function useSession() {
   const completeOnboarding = useSessionStore((state) => state.completeOnboarding);
-  const hasCompletedOnboarding = useSessionStore(
-    (state) => state.hasCompletedOnboarding,
-  );
+  const hasCompletedOnboarding = useSessionStore((state) => state.hasCompletedOnboarding);
   const status = useSessionStore((state) => state.status);
   const sessionToken = useSessionStore((state) => state.sessionToken);
   const bootstrap = useSessionStore((state) => state.bootstrap);
@@ -16,8 +14,8 @@ export function useSession() {
     bootstrap,
     completeOnboarding,
     hasCompletedOnboarding,
-    isAuthenticated: status === "authenticated",
-    isLoading: status === "checking",
+    isAuthenticated: status === 'authenticated',
+    isLoading: status === 'checking',
     register,
     sessionToken,
     signIn,

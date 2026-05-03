@@ -1,7 +1,6 @@
 import type { Href } from "expo-router";
 
 export const paths = {
-  publicHome: "/",
   signIn: "/sign-in",
   register: "/register",
   onboardingWelcome: "/welcome",

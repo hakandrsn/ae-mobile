@@ -1,0 +1,7 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location.",
+    "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location.",
+    "NSLocationAlwaysUsageDescription": "Allow $(PRODUCT_NAME) to use your location."
+  }
+}

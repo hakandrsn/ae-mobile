@@ -2,34 +2,34 @@ import { router } from "expo-router";
 import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
-import { AppButton, AppScreen, AppText, SurfaceCard } from "@/components/ui";
+import { AppScreen, Button, Surface, Typography } from '@/components/ui';
 import { paths } from "@/core/navigation/paths";
 
 export function PublicHomeScreen() {
   return (
     <AppScreen contentStyle={styles.centeredContent}>
-      <SurfaceCard style={styles.heroCard}>
-        <AppText variant="label">Public</AppText>
-        <AppText variant="title">Expo Router Foundation</AppText>
-        <AppText color="muted">
-          Public sayfalar giris gerektirmez. Burasi onboarding, landing, legal
-          veya marketing ekranlari icin dogru grup.
-        </AppText>
+      <Surface style={styles.heroCard}>
+        <Typography variant="label">Public</Typography>
+        <Typography variant="title">Expo Router Foundation</Typography>
+        <Typography color="muted">
+          Public sayfalar giris gerektirmez. Burasi onboarding, landing, legal veya marketing
+          ekranlari icin dogru grup.
+        </Typography>
         <View style={styles.actions}>
-          <AppButton
+          <Button
             label="Sign In Flow'a Git"
             onPress={() => router.push(paths.signIn)}
             style={styles.fullWidth}
-            tone="primary"
+            variant="primary"
           />
-          <AppButton
+          <Button
             label="Global Modal Ac"
             onPress={() => router.push(paths.modal)}
             style={styles.fullWidth}
-            tone="surface"
+            variant="surface"
           />
         </View>
-      </SurfaceCard>
+      </Surface>
     </AppScreen>
   );
 }

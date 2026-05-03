@@ -1,0 +1,7 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "ae-mobil, konumunuzu yakın içerik ve harita özellikleri için kullanmak istiyor.",
+    "NSLocationAlwaysAndWhenInUseUsageDescription": "ae-mobil, konumunuzu yakın içerik ve harita özellikleri için kullanmak istiyor.",
+    "NSLocationAlwaysUsageDescription": "ae-mobil, konumunuzu yakın içerik ve harita özellikleri için kullanmak istiyor."
+  }
+}
