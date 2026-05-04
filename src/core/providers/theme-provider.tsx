@@ -1,17 +1,7 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useMemo,
-} from "react";
+import { createContext, PropsWithChildren, useContext, useMemo } from 'react';
 
-import {
-  darkTheme,
-  lightTheme,
-  type AppTheme,
-  type ThemePreference,
-} from "@/theme";
-import { useAppStore } from "@/store/app-store";
+import { darkTheme, lightTheme, type AppTheme, type ThemePreference } from '@/theme';
+import { useAppStore } from '@/store/app-store';
 
 type ThemeContextValue = {
   theme: AppTheme;
@@ -24,7 +14,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: PropsWithChildren) {
   const themePreference = useAppStore((state) => state.themePreference);
   const setThemePreference = useAppStore((state) => state.setThemePreference);
-  const theme = themePreference === "dark" ? darkTheme : lightTheme;
+  const theme = themePreference === 'dark' ? darkTheme : lightTheme;
   const colorScheme = themePreference;
 
   const value = useMemo<ThemeContextValue>(
@@ -43,7 +33,7 @@ export function useAppTheme() {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error("useAppTheme must be used within ThemeProvider.");
+    throw new Error('useAppTheme must be used within ThemeProvider.');
   }
 
   return context;
