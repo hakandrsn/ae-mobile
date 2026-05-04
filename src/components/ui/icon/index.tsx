@@ -1,7 +1,7 @@
 import { memo, type ComponentType } from 'react';
 import type { SvgProps } from 'react-native-svg';
 
-import { appIcons, type AppIconName } from './app-icon.registry';
+import { appIcons, type AppIconName } from '../app-icon.registry';
 
 export type AppIconProps = Omit<SvgProps, 'width' | 'height'> & {
   name: AppIconName;
